@@ -1,10 +1,7 @@
 date('the_baptism_of_the_lord', 'The Baptism of the Lord', _, _, _, false, false, false, false).
-date('ash_wednesday', 'Ash Wednesday', _, _, _, false, false, false, false).
 date('saint_joseph_husband_of_mary', 'Saint Joseph, husband of Mary', _, _, _, true, false, false, false).
 date('the_annunciation_of_the_lord', 'The Annunciation of the Lord', _, _, _, true, false, false, false).
 date('ascension_of_the_lord', 'Ascension of the Lord', _, _, _, true, false, false, false).
-date('pentecost_sunday', 'Pentecost Sunday', _, _, _, true, false, false, false).
-date('the_most_holy_trinity', 'The Most Holy Trinity', _, _, _, true, false, false, false).
 date('the_blessed_virgin_mary_mother_of_the_church', 'The Blessed Virgin Mary, Mother of the Church', _, _, _, false, false, false, false).
 date('the_immaculate_heart_of_the_blessed_virgin_mary', 'The Immaculate Heart of the Blessed Virgin Mary', _, _, _, false, true, false, false).
 date('our_lord_jesus_christ_the_eternal_high_priest', 'Our Lord Jesus Christ, the Eternal High Priest', _, _, _, false, false, false, false).
