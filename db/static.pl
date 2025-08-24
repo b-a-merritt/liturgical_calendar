@@ -1,8 +1,10 @@
+% date/9
+% date(date_id, name, year, month, day, is_solemnity, is_feast, is_optional_memorial, is_optional_commemoration).
+
 date('the_blessed_virgin_mary_the_mother_of_god', 'The Blessed Virgin Mary, the Mother of God', _, 1, 1, true, false, false, false).
 date('saint_basil_the_great_and_saint_gregory_nazianzen_bishops_and_doctors_of_the_church', 'Saint Basil the Great and Saint Gregory Nazianzen, bishops and doctors of the Church', _, 1, 2, false, true, false, false).
 date('the_most_holy_name_of_jesus', 'The Most Holy Name of Jesus', _, 1, 3, false, false, true, false).
 date('blessed_marcelina_darowska_religious', 'Blessed Marcelina Darowska, religious', _, 1, 5, false, false, true, false).
-date('the_epiphany_of_the_lord', 'The Epiphany of the Lord', _, 1, 6, true, false, false, false).
 date('saint_raymond_of_penyafort_priest', 'Saint Raymond of Penyafort, priest', _, 1, 7, false, false, true, false).
 date('saint_hilary_bishop_and_doctor_of_the_church', 'Saint Hilary, bishop and doctor of the Church', _, 1, 13, false, false, true, false).
 date('saint_anthony_abbot', 'Saint Anthony, abbot', _, 1, 17, false, true, false, false).
