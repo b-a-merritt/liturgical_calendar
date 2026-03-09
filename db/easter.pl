@@ -5,6 +5,7 @@
 ]).
 
 :- use_module(util).
+:- use_module(transfer).
 :- multifile liturgical:date/9.
 
 easter_date(Year, Month, Day) :-
@@ -58,4 +59,15 @@ liturgical:date('holy_saturday', 'Holy Saturday', Year, Month, Day, false, false
 
 liturgical:date('second_sunday_of_easter', '2nd Sunday of Easter (Divine Mercy)', Year, Month, Day, false, false, false, false) :-
     divine_mercy_sunday_date(Year, Month, Day),
+    !.
+
+liturgical:date('ascension_of_the_lord', 'Ascension of the Lord', Year, Month, Day, true, false, false, false) :-
+    easter_date(Year, EasterMonth, EasterDay),
+    % Ascension is 40 days after Easter (39 days + Easter itself = 40th day)
+    ( transferable('ascension_of_the_lord', true)
+    -> % Transferred to 7th Sunday of Easter
+       days_after(Year, EasterMonth, EasterDay, 42, _, Month, Day)  % 6 weeks = 42 days
+    ;  % Thursday, 39 days after Easter
+       days_after(Year, EasterMonth, EasterDay, 39, _, Month, Day)
+    ),
     !.

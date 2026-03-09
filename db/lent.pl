@@ -21,3 +21,18 @@ liturgical:date('saint_joseph_husband_of_mary', 'Saint Joseph, husband of Mary',
     ;  Month = 3, Day = 19
     ),
     !.
+
+liturgical:date('the_annunciation_of_the_lord', 'The Annunciation of the Lord', Year, Month, Day, true, false, false, false) :-
+    % Annunciation is March 25, but if it falls during Holy Week or Easter Octave, it's transferred
+    palm_sunday_date(Year, PalmM, PalmD),
+    divine_mercy_sunday_date(Year, DivineM, DivineD),
+    date_stamp(Year, 3, 25, TAnnunc),
+    date_stamp(Year, PalmM, PalmD, TPalm),
+    date_stamp(Year, DivineM, DivineD, TDivine),
+    ( (TAnnunc >= TPalm, TAnnunc =< TDivine)
+    -> % Transfer to Monday after Divine Mercy Sunday
+       days_after(Year, DivineM, DivineD, 1, _, Month, Day)
+    ;  % Normal date
+       Month = 3, Day = 25
+    ),
+    !.

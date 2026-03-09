@@ -1,7 +1,9 @@
 :- module(catchall, [christmas_anchor_year/3]).
 
+:- use_module(advent).
 :- use_module(epiphany).
 :- use_module(lent).
+:- use_module(pentecost).
 :- use_module(string, [
     christmas_name/2,
     epiphany_name/2,
@@ -40,6 +42,29 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     weekday_atom(WN, Weekday),
     epiphany_name(Weekday, Name).
 
+
+% Blessed Virgin Mary on Saturday (Optional Memorial in Ordinary Time)
+% According to liturgical norms, this optional memorial is available on Saturdays
+% in Ordinary Time when no solemnity, feast, or obligatory memorial is assigned
+liturgical:date('the_blessed_virgin_mary_on_saturday', 'The Blessed Virgin Mary on Saturday', Year, Month, Day, false, false, true, false) :-
+    % Must be a Saturday
+    day_of_the_week(date(Year, Month, Day), 6),
+
+    % Must be in Ordinary Time (either after Baptism before Ash Wednesday, or after Pentecost before Advent)
+    date_stamp(Year, Month, Day, TCur),
+    baptism_date(Year, BaptM, BaptD),
+    date_stamp(Year, BaptM, BaptD, TBapt),
+    ash_wednesday_date(Year, AshM, AshD),
+    date_stamp(Year, AshM, AshD, TAsh),
+    pentecost_date(Year, PentM, PentD),
+    date_stamp(Year, PentM, PentD, TPent),
+    first_sunday_advent(Year, AdvM, AdvD),
+    date_stamp(Year, AdvM, AdvD, TAdv),
+
+    % Check if in Ordinary Time
+    ( (TCur > TBapt, TCur < TAsh) ; (TCur > TPent, TCur < TAdv) ),
+
+    !.
 
 % Baptism to Ash Wednesday -> Ordinary
 liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
