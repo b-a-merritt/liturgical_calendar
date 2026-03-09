@@ -63,9 +63,7 @@ liturgical:date('the_blessed_virgin_mary_on_saturday', 'The Blessed Virgin Mary 
     date_stamp(Year, AdvM, AdvD, TAdv),
 
     % Check if in Ordinary Time
-    ( (TCur > TBapt, TCur < TAsh) ; (TCur > TPent, TCur < TAdv) ),
-
-    !.
+    ( (TCur > TBapt, TCur < TAsh) ; (TCur > TPent, TCur < TAdv) ).
 
 % Baptism to Ash Wednesday -> Ordinary Time
 liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
