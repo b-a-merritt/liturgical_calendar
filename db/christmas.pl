@@ -3,13 +3,13 @@
 :- use_module(transfer).
 :- use_module(util).
 :- use_module(constants).
-:- multifile liturgical:date/9.
+:- multifile liturgical:date_internal/8.
 
-liturgical:date(ID,'The Immaculate Conception of the Blessed Virgin Mary', Year, Month, Day, true, false, false, false) :-
+liturgical:date_internal(ID, Year, Month, Day, true, false, false, false) :-
     constants:the_immaculate_conception_of_the_blessed_virgin_mary(ID),
     % December 8, but transferred if it falls on a Sunday in Advent
     day_of_the_week(date(Year, 12, 8), W),
-    ( (W =:= 7, transferable('the_immaculate_conception_of_the_blessed_virgin_mary', true))
+    ( (W =:= 7, transferable(ID, true))
     -> % Transfer to Monday
        Month = 12, Day = 9
     ;  % Normal date
@@ -18,7 +18,7 @@ liturgical:date(ID,'The Immaculate Conception of the Blessed Virgin Mary', Year,
     !.
 
 % If Christmas (Dec 25) is a Sunday, celebrate on Friday Dec 30.
-liturgical:date(ID,'The Holy Family of Jesus, Mary and Joseph',
+liturgical:date_internal(ID,
     Year, Month, Day, false, false, false, false) :-
     constants:the_holy_family_of_jesus_mary_and_joseph(ID),
     (

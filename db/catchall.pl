@@ -15,7 +15,7 @@
 ]).
 :- use_module(util).
 :- use_module(constants).
-:- multifile liturgical:date/9.
+:- multifile liturgical:date_internal/8.
 
 % Mary to Epiphany -> Christmas Octave
 % Christmas to End of Year -> Christmas
@@ -48,7 +48,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
 
 
 % Blessed Virgin Mary on Saturday (Optional Memorial in Ordinary Time)
-liturgical:date(ID,'The Blessed Virgin Mary on Saturday', Year, Month, Day, false, false, true, false) :-
+liturgical:date_internal(ID, Year, Month, Day, false, false, true, false) :-
     constants:the_blessed_virgin_mary_on_saturday(ID),
     % Must be a Saturday
     day_of_the_week(date(Year, Month, Day), 6),
