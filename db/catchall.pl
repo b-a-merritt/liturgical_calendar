@@ -1,6 +1,7 @@
 :- module(catchall, [christmas_anchor_year/3]).
 
 :- use_module(advent).
+:- use_module(easter).
 :- use_module(epiphany).
 :- use_module(lent).
 :- use_module(pentecost).
@@ -8,7 +9,9 @@
     christmas_name/2,
     epiphany_name/2,
     season_name/4,
-    christmas_octave_name/2
+    christmas_octave_name/2,
+    easter_octave_name/2,
+    holy_week_name/2
 ]).
 :- use_module(util).
 :- multifile liturgical:date/9.
@@ -44,8 +47,6 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
 
 
 % Blessed Virgin Mary on Saturday (Optional Memorial in Ordinary Time)
-% According to liturgical norms, this optional memorial is available on Saturdays
-% in Ordinary Time when no solemnity, feast, or obligatory memorial is assigned
 liturgical:date('the_blessed_virgin_mary_on_saturday', 'The Blessed Virgin Mary on Saturday', Year, Month, Day, false, false, true, false) :-
     % Must be a Saturday
     day_of_the_week(date(Year, Month, Day), 6),
@@ -66,55 +67,172 @@ liturgical:date('the_blessed_virgin_mary_on_saturday', 'The Blessed Virgin Mary 
 
     !.
 
-% Baptism to Ash Wednesday -> Ordinary
+% Baptism to Ash Wednesday -> Ordinary Time
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+    date_stamp(Year, Month, Day, TCur),
+    baptism_date(Year, BaptM, BaptD),
+    date_stamp(Year, BaptM, BaptD, TBapt),
+    ash_wednesday_date(Year, AshM, AshD),
+    date_stamp(Year, AshM, AshD, TAsh),
+    TCur > TBapt,
+    TCur < TAsh,
+
+    % Count weeks from Baptism of the Lord
+    previous_sunday_before(Year, Month, Day, PSY, PSM, PSD),
+    date_stamp(PSY, PSM, PSD, TPS),
+
+    % First Sunday in Ordinary Time is the Sunday after Baptism
+    sunday_on_or_after(Year, BaptM, BaptD, S0Y, S0M, S0D),
+    date_stamp(S0Y, S0M, S0D, TS0),
+
+    ( TPS >= TS0
+    -> Week is floor((TPS - TS0) / (7*24*60*60)) + 1
+    ;  Week = 0
+    ),
+
+    day_of_the_week(date(Year, Month, Day), WN),
+    weekday_atom(WN, Weekday),
+    season_name(Weekday, Week, 'Ordinary Time', Name),
+
+    !.
+
+% Ash Wednesday to Palm Sunday -> Lent
 liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     ash_wednesday_date(Year, AshM, AshD),
     date_stamp(Year, AshM, AshD, TAsh),
-    TCur < TAsh,
+    palm_sunday_date(Year, PalmM, PalmD),
+    date_stamp(Year, PalmM, PalmD, TPalm),
+    TCur >= TAsh,
+    TCur < TPalm,
 
-    % Compute week by counting Sundays that occurred strictly before current day,
-    % starting from the first Sunday ON/AFTER Dec 25.
-    christmas_anchor_year(Year, Month, CYear),
-    sunday_on_or_after(CYear, 12, 25, S0Y, S0M, S0D),
+    % Count weeks from Ash Wednesday
     previous_sunday_before(Year, Month, Day, PSY, PSM, PSD),
+    date_stamp(PSY, PSM, PSD, TPS),
 
-    % If the previous-Sunday-before(current) is before the anchor Sunday,
-    % zero Sundays have "passed" yet; else count whole weeks between Sundays.
-    ( date_stamp(PSY,PSM,PSD, TPS),
-      date_stamp(S0Y,S0M,S0D, TS0),
-      TPS >= TS0
-    -> SundaysPassed is ((TPS - TS0) // (7*24*60*60)) + 1
-    ;  SundaysPassed = 0
+    % First Sunday of Lent is the Sunday after Ash Wednesday
+    sunday_on_or_after(Year, AshM, AshD, S0Y, S0M, S0D),
+    date_stamp(S0Y, S0M, S0D, TS0),
+
+    ( TPS >= TS0
+    -> Week is floor((TPS - TS0) / (7*24*60*60)) + 1
+    ;  Week = 0  % Before first Sunday of Lent
     ),
-    Week is SundaysPassed + 1,
 
-    % Weekday label for the current date
     day_of_the_week(date(Year, Month, Day), WN),
     weekday_atom(WN, Weekday),
-    season_name(Weekday, Week, 'Christmas', Name),
-
-    !.  % keep this catch-all last so specific feasts match before it
-
-% Ash Wednesday to Palm Sunday -> Lent
-
+    season_name(Weekday, Week, 'Lent', Name),
+    !.
 
 % Palm Sunday to Holy Thursday -> Holy Week
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+    date_stamp(Year, Month, Day, TCur),
+    palm_sunday_date(Year, PalmM, PalmD),
+    date_stamp(Year, PalmM, PalmD, TPalm),
+    easter_date(Year, EasterM, EasterD),
+    days_after(Year, EasterM, EasterD, -3, _, ThurM, ThurD),  % Holy Thursday
+    date_stamp(Year, ThurM, ThurD, TThur),
+    TCur >= TPalm,
+    TCur =< TThur,
 
+    day_of_the_week(date(Year, Month, Day), WN),
+    weekday_atom(WN, Weekday),
+    holy_week_name(Weekday, Name),
+    !.
 
 % Easter to Divine Mercy Sunday -> Octave of Easter
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+    date_stamp(Year, Month, Day, TCur),
+    easter_date(Year, EasterM, EasterD),
+    date_stamp(Year, EasterM, EasterD, TEaster),
+    divine_mercy_sunday_date(Year, DivineM, DivineD),
+    date_stamp(Year, DivineM, DivineD, TDivine),
+    TCur >= TEaster,
+    TCur =< TDivine,
 
+    day_of_the_week(date(Year, Month, Day), WN),
+    weekday_atom(WN, Weekday),
+    easter_octave_name(Weekday, Name),
+    !.
 
 % Divine Mercy Sunday to Pentecost -> Easter
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+    date_stamp(Year, Month, Day, TCur),
+    divine_mercy_sunday_date(Year, DivineM, DivineD),
+    date_stamp(Year, DivineM, DivineD, TDivine),
+    pentecost_date(Year, PentM, PentD),
+    date_stamp(Year, PentM, PentD, TPent),
+    TCur > TDivine,
+    TCur < TPent,
 
+    % Count weeks from Easter
+    easter_date(Year, EasterM, EasterD),
+    previous_sunday_before(Year, Month, Day, PSY, PSM, PSD),
+    date_stamp(PSY, PSM, PSD, TPS),
+    date_stamp(Year, EasterM, EasterD, TEaster),
 
-% Pentecost to First Sunday of Advent -> Ordinary
+    Week is floor((TPS - TEaster) / (7*24*60*60)) + 1,
 
+    day_of_the_week(date(Year, Month, Day), WN),
+    weekday_atom(WN, Weekday),
+    season_name(Weekday, Week, 'Easter', Name),
+    !.
+
+% Pentecost to First Sunday of Advent -> Ordinary Time
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+    date_stamp(Year, Month, Day, TCur),
+    pentecost_date(Year, PentM, PentD),
+    date_stamp(Year, PentM, PentD, TPent),
+    first_sunday_advent(Year, AdvM, AdvD),
+    date_stamp(Year, AdvM, AdvD, TAdv),
+    TCur > TPent,
+    TCur < TAdv,
+
+    % Count weeks from Baptism of the Lord (to get continuous week numbering)
+    baptism_date(Year, BaptM, BaptD),
+    ash_wednesday_date(Year, AshM, AshD),
+    date_stamp(Year, AshM, AshD, TAsh),
+
+    % Count weeks in first Ordinary Time period
+    date_stamp(Year, BaptM, BaptD, TBapt),
+    WeeksOT1 is floor((TAsh - TBapt) / (7*24*60*60)),
+
+    % Add weeks since Pentecost
+    previous_sunday_before(Year, Month, Day, PSY, PSM, PSD),
+    date_stamp(PSY, PSM, PSD, TPS),
+    WeeksSincePent is floor((TPS - TPent) / (7*24*60*60)) + 1,
+
+    Week is WeeksOT1 + WeeksSincePent,
+
+    day_of_the_week(date(Year, Month, Day), WN),
+    weekday_atom(WN, Weekday),
+    season_name(Weekday, Week, 'Ordinary Time', Name),
+    !.
 
 % First Sunday of Advent to Christmas -> Advent
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+    date_stamp(Year, Month, Day, TCur),
+    first_sunday_advent(Year, AdvM, AdvD),
+    date_stamp(Year, AdvM, AdvD, TAdv),
+    date_stamp(Year, 12, 25, TXmas),
+    TCur >= TAdv,
+    TCur < TXmas,
 
+    % Count weeks from first Sunday of Advent
+    previous_sunday_before(Year, Month, Day, PSY, PSM, PSD),
+    date_stamp(PSY, PSM, PSD, TPS),
 
-%
+    ( TPS >= TAdv
+    -> Week is floor((TPS - TAdv) / (7*24*60*60)) + 1
+    ;  Week = 0  % Before first Sunday of Advent (shouldn't happen)
+    ),
+
+    day_of_the_week(date(Year, Month, Day), WN),
+    weekday_atom(WN, Weekday),
+    season_name(Weekday, Week, 'Advent', Name),
+    !.
+
+% Christmas Day to Epiphany -> Christmas Octave
 liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
 
