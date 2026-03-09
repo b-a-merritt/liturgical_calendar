@@ -1,8 +1,15 @@
-:- multifile date/9.
-:- discontiguous date/9.
-:- ensure_loaded(epiphany).
-:- ensure_loaded(lent).
-:- ensure_loaded(string).
+:- module(catchall, [christmas_anchor_year/3]).
+
+:- use_module(epiphany).
+:- use_module(lent).
+:- use_module(string, [
+    christmas_name/2,
+    epiphany_name/2,
+    season_name/4,
+    christmas_octave_name/2
+]).
+:- use_module(util).
+:- multifile liturgical:date/9.
 
 % Mary to Epiphany -> Christmas Octave
 % Christmas to End of Year -> Christmas
@@ -10,7 +17,7 @@ christmas_anchor_year(Year, Month, AnchorYear) :-
     ( Month =:= 12 -> AnchorYear = Year ; AnchorYear is Year - 1 ).
 
 % Mary to Epiphany -> Christmas
-date(_, Name, Year, Month, Day, false, false, false, false) :-
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
 
     epiphany_date(Year, EpM, EpD),
@@ -22,7 +29,7 @@ date(_, Name, Year, Month, Day, false, false, false, false) :-
     christmas_name(Weekday, Name).
 
 % Epiphany to Baptism -> Epiphany
-date(_, Name, Year, Month, Day, false, false, false, false) :-
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
 
     baptism_date(Year, BaptM, BaptD),
@@ -35,7 +42,7 @@ date(_, Name, Year, Month, Day, false, false, false, false) :-
 
 
 % Baptism to Ash Wednesday -> Ordinary
-date(_, Name, Year, Month, Day, false, false, false, false) :-
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     ash_wednesday_date(Year, AshM, AshD),
     date_stamp(Year, AshM, AshD, TAsh),
@@ -48,7 +55,7 @@ date(_, Name, Year, Month, Day, false, false, false, false) :-
     previous_sunday_before(Year, Month, Day, PSY, PSM, PSD),
 
     % If the previous-Sunday-before(current) is before the anchor Sunday,
-    % zero Sundays have “passed” yet; else count whole weeks between Sundays.
+    % zero Sundays have "passed" yet; else count whole weeks between Sundays.
     ( date_stamp(PSY,PSM,PSD, TPS),
       date_stamp(S0Y,S0M,S0D, TS0),
       TPS >= TS0
@@ -82,8 +89,8 @@ date(_, Name, Year, Month, Day, false, false, false, false) :-
 % First Sunday of Advent to Christmas -> Advent
 
 
-% 
-date(_, Name, Year, Month, Day, false, false, false, false) :-
+%
+liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
 
     christmas_anchor_year(Year, Month, CYear),

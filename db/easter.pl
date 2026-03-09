@@ -1,4 +1,11 @@
-:- ensure_loaded(util).
+:- module(easter, [
+    easter_date/3,
+    palm_sunday_date/3,
+    divine_mercy_sunday_date/3
+]).
+
+:- use_module(util).
+:- multifile liturgical:date/9.
 
 easter_date(Year, Month, Day) :-
     A is Year mod 19,
@@ -26,29 +33,29 @@ divine_mercy_sunday_date(Year, Month, Day) :-
     weeks_after(Year, EasterMonth, EasterDay, 1, _, Month, Day).
 
 
-date('easter_sunday_of_the_lords_resurrection', 'Easter Sunday of the Lords Resurrection', Year, Month, Day, true, false, false, false) :-
+liturgical:date('easter_sunday_of_the_lords_resurrection', 'Easter Sunday of the Lords Resurrection', Year, Month, Day, true, false, false, false) :-
     easter_date(Year, Month, Day),
     !.
 
-date('palm_sunday_of_the_lords_passion', 'Palm Sunday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
+liturgical:date('palm_sunday_of_the_lords_passion', 'Palm Sunday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
     palm_sunday_date(Year, Month, Day),
     !.
 
-date('holy_thursday_of_the_lords_supper', 'Holy Thursday of the Lords Supper', Year, Month, Day, false, false, false, false) :-
+liturgical:date('holy_thursday_of_the_lords_supper', 'Holy Thursday of the Lords Supper', Year, Month, Day, false, false, false, false) :-
     easter_date(Year, EasterMonth, EasterDay),
     days_after(Year, EasterMonth, EasterDay, -3, _, Month, Day),
     !.
 
-date('good_friday_of_the_lords_passion', 'Good Friday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
+liturgical:date('good_friday_of_the_lords_passion', 'Good Friday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
     easter_date(Year, EasterMonth, EasterDay),
     days_after(Year, EasterMonth, EasterDay, -2, _, Month, Day),
     !.
 
-date('holy_saturday', 'Holy Saturday', Year, Month, Day, false, false, false, false) :-
+liturgical:date('holy_saturday', 'Holy Saturday', Year, Month, Day, false, false, false, false) :-
     easter_date(Year, EasterMonth, EasterDay),
     days_after(Year, EasterMonth, EasterDay, -1, _, Month, Day),
     !.
 
-date('second_sunday_of_easter', '2nd Sunday of Easter (Divine Mercy)', Year, Month, Day, false, false, false, false) :-
+liturgical:date('second_sunday_of_easter', '2nd Sunday of Easter (Divine Mercy)', Year, Month, Day, false, false, false, false) :-
     divine_mercy_sunday_date(Year, Month, Day),
     !.

@@ -1,3 +1,5 @@
+:- module(transfer, [transferable/2]).
+
 % transferable/2
 % transferable(date_id, boolean).
 
