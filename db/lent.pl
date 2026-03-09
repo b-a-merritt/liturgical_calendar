@@ -3,6 +3,7 @@
 :- use_module(easter).
 :- use_module(transfer).
 :- use_module(util).
+:- use_module(constants).
 :- multifile liturgical:date/9.
 
 ash_wednesday_date(Year, Month, Day) :-
@@ -11,18 +12,21 @@ ash_wednesday_date(Year, Month, Day) :-
     days_after(Year, EasterMonth, EasterDay, -46, _, Month, Day).
 
 
-liturgical:date('ash_wednesday', 'Ash Wednesday', Year, Month, Day, false, false, false, false) :-
+liturgical:date(ID,'Ash Wednesday', Year, Month, Day, false, false, false, false) :-
+    constants:ash_wednesday(ID),
     ash_wednesday_date(Year, Month, Day),
     !.
 
-liturgical:date('saint_joseph_husband_of_mary', 'Saint Joseph, husband of Mary', Year, Month, Day, true, false, false, false) :-
+liturgical:date(ID,'Saint Joseph, husband of Mary', Year, Month, Day, true, false, false, false) :-
+    constants:saint_joseph_husband_of_mary(ID),
     ( transferable('saint_joseph_husband_of_mary', true)
     -> next_sunday(Year, 3, 19, Year, Month, Day)
     ;  Month = 3, Day = 19
     ),
     !.
 
-liturgical:date('the_annunciation_of_the_lord', 'The Annunciation of the Lord', Year, Month, Day, true, false, false, false) :-
+liturgical:date(ID,'The Annunciation of the Lord', Year, Month, Day, true, false, false, false) :-
+    constants:the_annunciation_of_the_lord(ID),
     % Annunciation is March 25, but if it falls during Holy Week or Easter Octave, it's transferred
     palm_sunday_date(Year, PalmM, PalmD),
     divine_mercy_sunday_date(Year, DivineM, DivineD),

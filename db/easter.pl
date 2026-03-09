@@ -6,6 +6,7 @@
 
 :- use_module(util).
 :- use_module(transfer).
+:- use_module(constants).
 :- multifile liturgical:date/9.
 
 easter_date(Year, Month, Day) :-
@@ -34,25 +35,30 @@ divine_mercy_sunday_date(Year, Month, Day) :-
     weeks_after(Year, EasterMonth, EasterDay, 1, _, Month, Day).
 
 
-liturgical:date('easter_sunday_of_the_lords_resurrection', 'Easter Sunday of the Lords Resurrection', Year, Month, Day, true, false, false, false) :-
+liturgical:date(ID,'Easter Sunday of the Lords Resurrection', Year, Month, Day, true, false, false, false) :-
+    constants:easter_sunday_of_the_lords_resurrection(ID),
     easter_date(Year, Month, Day),
     !.
 
-liturgical:date('palm_sunday_of_the_lords_passion', 'Palm Sunday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
+liturgical:date(ID,'Palm Sunday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
+    constants:palm_sunday_of_the_lords_passion(ID),
     palm_sunday_date(Year, Month, Day),
     !.
 
-liturgical:date('holy_thursday_of_the_lords_supper', 'Holy Thursday of the Lords Supper', Year, Month, Day, false, false, false, false) :-
+liturgical:date(ID,'Holy Thursday of the Lords Supper', Year, Month, Day, false, false, false, false) :-
+    constants:holy_thursday_of_the_lords_supper(ID),
     easter_date(Year, EasterMonth, EasterDay),
     days_after(Year, EasterMonth, EasterDay, -3, _, Month, Day),
     !.
 
-liturgical:date('good_friday_of_the_lords_passion', 'Good Friday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
+liturgical:date(ID,'Good Friday of the Lords Passion', Year, Month, Day, false, false, false, false) :-
+    constants:good_friday_of_the_lords_passion(ID),
     easter_date(Year, EasterMonth, EasterDay),
     days_after(Year, EasterMonth, EasterDay, -2, _, Month, Day),
     !.
 
-liturgical:date('holy_saturday', 'Holy Saturday', Year, Month, Day, false, false, false, false) :-
+liturgical:date(ID,'Holy Saturday', Year, Month, Day, false, false, false, false) :-
+    constants:holy_saturday(ID),
     easter_date(Year, EasterMonth, EasterDay),
     days_after(Year, EasterMonth, EasterDay, -1, _, Month, Day),
     !.
@@ -61,7 +67,8 @@ liturgical:date('second_sunday_of_easter', '2nd Sunday of Easter (Divine Mercy)'
     divine_mercy_sunday_date(Year, Month, Day),
     !.
 
-liturgical:date('ascension_of_the_lord', 'Ascension of the Lord', Year, Month, Day, true, false, false, false) :-
+liturgical:date(ID,'Ascension of the Lord', Year, Month, Day, true, false, false, false) :-
+    constants:ascension_of_the_lord(ID),
     easter_date(Year, EasterMonth, EasterDay),
     % Ascension is 40 days after Easter (39 days + Easter itself = 40th day)
     ( transferable('ascension_of_the_lord', true)

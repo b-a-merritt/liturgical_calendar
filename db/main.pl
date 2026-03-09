@@ -3,6 +3,9 @@
 :- multifile date/9.
 :- discontiguous date/9.
 
+% Load constants first
+:- use_module(constants).
+
 % Load all season/feast modules
 :- use_module(advent).
 :- use_module(christmas).

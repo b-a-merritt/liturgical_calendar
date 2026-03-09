@@ -1,0 +1,527 @@
+:- module(constants, [
+    all_saints/1
+    ,ascension_of_the_lord/1
+    ,ash_wednesday/1
+    ,blessed_bronislaw_markiewicz_priest/1
+    ,blessed_marcelina_darowska_religious/1
+    ,blessed_wladyslaw_bladzinski_priest_and_companions_martyrs/1
+    ,easter_sunday_of_the_lords_resurrection/1
+    ,first_sunday_advent/1
+    ,fourth_sunday_advent/1
+    ,good_friday_of_the_lords_passion/1
+    ,holy_saturday/1
+    ,holy_thursday_of_the_lords_supper/1
+    ,our_lady_of_czestochowa/1
+    ,our_lady_of_fatima/1
+    ,our_lady_of_guadalupe/1
+    ,our_lady_of_loreto/1
+    ,our_lady_of_lourdes/1
+    ,our_lady_of_mercy/1
+    ,our_lady_of_mount_carmel/1
+    ,our_lady_of_sorrows/1
+    ,our_lady_of_the_rosary/1
+    ,our_lord_jesus_christ_king_of_the_universe/1
+    ,our_lord_jesus_christ_the_eternal_high_priest/1
+    ,palm_sunday_of_the_lords_passion/1
+    ,pentecost_sunday/1
+    ,saint_adalbert_bishop_and_martyr/1
+    ,saint_agatha_virgin_and_martyr/1
+    ,saint_agnes_virgin_and_martyr/1
+    ,saint_albert_chmielowski_religious/1
+    ,saint_albert_the_great_bishop_and_doctor_of_the_church/1
+    ,saint_aloysius_gonzaga_religious/1
+    ,saint_alphonsus_liguori_bishop_and_doctor_of_the_church/1
+    ,saint_ambrose_bishop_and_doctor_of_the_church/1
+    ,saint_andrew_apostle/1
+    ,saint_andrew_dunglac_priest_and_companions_martyrs/1
+    ,saint_andrew_kim_taegon_priest_saint_paul_chong_hasang_and_companions_martyrs/1
+    ,saint_andrzej_bobola_priest_and_martyr/1
+    ,saint_angela_merici_virgin/1
+    ,saint_anselm_bishop_and_doctor_of_the_church/1
+    ,saint_ansgar_bishop/1
+    ,saint_anthony_abbot/1
+    ,saint_anthony_mary_claret_bishop/1
+    ,saint_anthony_mary_zaccaria_priest/1
+    ,saint_anthony_of_padua_priest_and_doctor_of_the_church/1
+    ,saint_apollinaris_bishop_and_martyr/1
+    ,saint_athanasius_bishop_and_doctor_of_the_church/1
+    ,saint_augustine_bishop_and_doctor_of_the_church/1
+    ,saint_augustine_of_canterbury_bishop/1
+    ,saint_augustine_zhao_rong_priest_and_companions_martyrs/1
+    ,saint_barnabas_apostle/1
+    ,saint_bartholomew_apostle/1
+    ,saint_basil_the_great_and_saint_gregory_nazianzen_bishops_and_doctors_of_the_church/1
+    ,saint_bede_the_venerable_priest_and_doctor_of_the_church/1
+    ,saint_benedict_abbot/1
+    ,saint_bernard_abbot_and_doctor_of_the_church/1
+    ,saint_bernardine_of_siena_priest/1
+    ,saint_blase_bishop_and_martyr/1
+    ,saint_bonaventure_bishop_and_doctor_of_the_church/1
+    ,saint_boniface_bishop_and_martyr/1
+    ,saint_bridget_religious/1
+    ,saint_bruno_priest/1
+    ,saint_cajetan_priest/1
+    ,saint_callistus_i_pope_and_martyr/1
+    ,saint_camillus_de_lellis_priest/1
+    ,saint_casimir/1
+    ,saint_catherine_of_alexandria_virgin_and_martyr/1
+    ,saint_catherine_of_siena_virgin_and_doctor_of_the_church/1
+    ,saint_cecilia_virgin_and_martyr/1
+    ,saint_charles_borromeo_bishop/1
+    ,saint_charles_lwanga_and_companions_martyrs/1
+    ,saint_christopher_magallanes_priest_and_companions_martyrs/1
+    ,saint_clare_virgin/1
+    ,saint_clement_i_pope_and_martyr/1
+    ,saint_columban_abbot/1
+    ,saint_cornelius_pope_and_saint_cyprian_bishop_martyrs/1
+    ,saint_cosmas_and_saint_damian_martyrs/1
+    ,saint_cyril_monk_and_saint_methodius_bishop/1
+    ,saint_cyril_of_alexandria_bishop_and_doctor_of_the_church/1
+    ,saint_cyril_of_jerusalem_bishop_and_doctor_of_the_church/1
+    ,saint_damasus_i_pope/1
+    ,saint_denis_bishop_and_companions_martyrs/1
+    ,saint_dominic_priest/1
+    ,saint_elizabeth_of_hungary_religious/1
+    ,saint_elizabeth_of_portugal/1
+    ,saint_ephrem_deacon_and_doctor_of_the_church/1
+    ,saint_eusebius_of_vercelli_bishop/1
+    ,saint_fabian_pope_and_martyr/1
+    ,saint_faustina_kowalska_virgin/1
+    ,saint_fidelis_of_sigmaringen_priest_and_martyr/1
+    ,saint_frances_of_rome_religious/1
+    ,saint_francis_de_sales_bishop_and_doctor_of_the_church/1
+    ,saint_francis_of_assisi_religious/1
+    ,saint_francis_of_paola_hermit/1
+    ,saint_francis_xavier_priest/1
+    ,saint_george_martyr/1
+    ,saint_gertrude_virgin/1
+    ,saint_gregory_of_narek_abbot_and_doctor_of_the_church/1
+    ,saint_gregory_the_great_pope_and_doctor_of_the_church/1
+    ,saint_gregory_vii_pope/1
+    ,saint_hedwig_religious/1
+    ,saint_henry/1
+    ,saint_hilary_bishop_and_doctor_of_the_church/1
+    ,saint_hildegard_of_bingen_virgin_and_doctor_of_the_church/1
+    ,saint_hyacinth_of_poland_priest/1
+    ,saint_ignatius_of_antioch_bishop_and_martyr/1
+    ,saint_ignatius_of_loyola_priest/1
+    ,saint_irenaeus_bishop_martyr_and_doctor_of_the_church/1
+    ,saint_isidore_bishop_and_doctor_of_the_church/1
+    ,saint_jadwiga_of_poland/1
+    ,saint_james_apostle/1
+    ,saint_jane_frances_de_chantal_religious/1
+    ,saint_januarius_bishop_and_martyr/1
+    ,saint_jerome_emiliani/1
+    ,saint_jerome_priest_and_doctor_of_the_church/1
+    ,saint_joachim_and_saint_anne_parents_of_the_blessed_virgin_mary/1
+    ,saint_john_apostle_and_evangelist/1
+    ,saint_john_baptist_de_la_salle_priest/1
+    ,saint_john_bosco_priest/1
+    ,saint_john_chrysostom_bishop_and_doctor_of_the_church/1
+    ,saint_john_damascene_priest_and_doctor_of_the_church/1
+    ,saint_john_de_brebeuf_saint_isaac_jogues_priests_and_companions_martyrs/1
+    ,saint_john_eudes_priest/1
+    ,saint_john_fisher_bishop_and_saint_thomas_more_martyrs/1
+    ,saint_john_i_pope_and_martyr/1
+    ,saint_john_leonardi_priest/1
+    ,saint_john_of_avila_priest_and_doctor_of_the_church/1
+    ,saint_john_of_capistrano_priest/1
+    ,saint_john_of_dukla_priest/1
+    ,saint_john_of_god_religious/1
+    ,saint_john_of_kanty_priest/1
+    ,saint_john_of_nepomuk_priest_and_martyr/1
+    ,saint_john_of_the_cross_priest_and_doctor_of_the_church/1
+    ,saint_john_paul_ii_pope/1
+    ,saint_john_vianney_priest/1
+    ,saint_john_xxiii_pope/1
+    ,saint_josaphat_bishop_and_martyr/1
+    ,saint_joseph_calasanz_priest/1
+    ,saint_joseph_husband_of_mary/1
+    ,saint_joseph_the_worker/1
+    ,saint_josephine_bakhita_virgin/1
+    ,saint_jozef_bilczewski_bishop/1
+    ,saint_juan_diego_cuauhtlatoatzin/1
+    ,saint_justin_martyr/1
+    ,saint_lawrence_deacon_and_martyr/1
+    ,saint_lawrence_of_brindisi_priest_and_doctor_of_the_church/1
+    ,saint_lawrence_ruiz_and_companions_martyrs/1
+    ,saint_leo_the_great_pope_and_doctor_of_the_church/1
+    ,saint_louis/1
+    ,saint_louis_grignion_de_montfort_priest/1
+    ,saint_lucy_virgin_and_martyr/1
+    ,saint_luke_evangelist/1
+    ,saint_marcellinus_and_saint_peter_martyrs/1
+    ,saint_margaret_mary_alacoque_virgin/1
+    ,saint_margaret_of_scotland/1
+    ,saint_maria_goretti_virgin_and_martyr/1
+    ,saint_mark_evangelist/1
+    ,saint_martha_saint_mary_and_saint_lazarus/1
+    ,saint_martin_de_porres_religious/1
+    ,saint_martin_i_pope_and_martyr/1
+    ,saint_martin_of_tours_bishop/1
+    ,saint_mary_magdalene/1
+    ,saint_mary_magdalene_de_pazzi_virgin/1
+    ,saint_matthew_apostle_and_evangelist/1
+    ,saint_matthias_apostle/1
+    ,saint_maximilian_kolbe_priest_and_martyr/1
+    ,saint_michael_saint_gabriel_and_saint_raphael_archangels/1
+    ,saint_monica/1
+    ,saint_nereus_and_saint_achilleus_martyrs/1
+    ,saint_nicholas_bishop/1
+    ,saint_norbert_bishop/1
+    ,saint_olga_of_kiev/1
+    ,saint_pancras_martyr/1
+    ,saint_patrick_bishop/1
+    ,saint_paul_miki_and_companions_martyrs/1
+    ,saint_paul_of_the_cross_priest/1
+    ,saint_paul_vi_pope/1
+    ,saint_paulinus_of_nola_bishop/1
+    ,saint_perpetua_and_saint_felicity_martyrs/1
+    ,saint_peter_and_saint_paul_apostles/1
+    ,saint_peter_canisius_priest_and_doctor_of_the_church/1
+    ,saint_peter_chanel_priest_and_martyr/1
+    ,saint_peter_chrysologus_bishop_and_doctor_of_the_church/1
+    ,saint_peter_claver_priest/1
+    ,saint_peter_damian_bishop_and_doctor_of_the_church/1
+    ,saint_peter_julian_eymard_priest/1
+    ,saint_philip_and_saint_james_apostles/1
+    ,saint_philip_neri_priest/1
+    ,saint_pius_of_pietrelcina_priest/1
+    ,saint_pius_v_pope/1
+    ,saint_pius_x_pope/1
+    ,saint_polycarp_bishop_and_martyr/1
+    ,saint_pontian_pope_and_saint_hippolytus_priest_martyrs/1
+    ,saint_raymond_of_penyafort_priest/1
+    ,saint_rita_of_cassia_religious/1
+    ,saint_robert_bellarmine_bishop_and_doctor_of_the_church/1
+    ,saint_romuald_abbot/1
+    ,saint_rose_of_lima_virgin/1
+    ,saint_scholastica_virgin/1
+    ,saint_sebastian_martyr/1
+    ,saint_sharbel_makhluf_priest/1
+    ,saint_simon_and_saint_jude_apostles/1
+    ,saint_sixtus_ii_pope_and_companions_martyrs/1
+    ,saint_stanislaus_bishop_and_martyr/1
+    ,saint_stanislaus_kostka_religious/1
+    ,saint_stephen_first_martyr/1
+    ,saint_stephen_of_hungary/1
+    ,saint_sylvester_i_pope/1
+    ,saint_teresa_benedicta_of_the_cross_virgin_and_martyr/1
+    ,saint_teresa_of_calcutta_virgin/1
+    ,saint_teresa_of_jesus_virgin_and_doctor_of_the_church/1
+    ,saint_therese_of_the_child_jesus_virgin_and_doctor_of_the_church/1
+    ,saint_thomas_apostle/1
+    ,saint_thomas_aquinas_priest_and_doctor_of_the_church/1
+    ,saint_thomas_becket_bishop_and_martyr/1
+    ,saint_timothy_and_saint_titus_bishops/1
+    ,saint_turibius_de_mongrovejo_bishop/1
+    ,saint_vincent_de_paul_priest/1
+    ,saint_vincent_deacon_and_martyr/1
+    ,saint_vincent_ferrer_priest/1
+    ,saint_vladimir/1
+    ,saint_wenceslaus_martyr/1
+    ,saint_zygmunt_gorazdowski_priest/1
+    ,second_sunday_advent/1
+    ,second_sunday_of_easter/1
+    ,the_annunciation_of_the_lord/1
+    ,the_assumption_of_the_blessed_virgin_mary/1
+    ,the_baptism_of_the_lord/1
+    ,the_blessed_virgin_mary_mother_of_the_church/1
+    ,the_blessed_virgin_mary_on_saturday/1
+    ,the_blessed_virgin_mary_the_mother_of_god/1
+    ,the_chair_of_saint_peter_apostle/1
+    ,the_commemoration_of_all_the_faithful_departed_all_souls/1
+    ,the_conversion_of_saint_paul_apostle/1
+    ,the_dedication_of_the_basilica_of_saint_mary_major_in_rome/1
+    ,the_dedication_of_the_basilicas_of_saint_peter_and_saint_paul_in_rome_apostles/1
+    ,the_dedication_of_the_lateran_basilica_in_rome/1
+    ,the_epiphany_of_the_lord/1
+    ,the_exaltation_of_the_holy_cross/1
+    ,the_first_martyrs_of_the_church_of_rome/1
+    ,the_holy_family_of_jesus_mary_and_joseph/1
+    ,the_holy_guardian_angels/1
+    ,the_holy_innocents_martyrs/1
+    ,the_immaculate_conception_of_the_blessed_virgin_mary/1
+    ,the_immaculate_heart_of_the_blessed_virgin_mary/1
+    ,the_most_holy_body_and_blood_of_christ/1
+    ,the_most_holy_name_of_jesus/1
+    ,the_most_holy_name_of_mary/1
+    ,the_most_holy_trinity/1
+    ,the_most_sacred_heart_of_jesus/1
+    ,the_nativity_of_saint_john_the_baptist/1
+    ,the_nativity_of_the_blessed_virgin_mary/1
+    ,the_nativity_of_the_lord_christmas/1
+    ,the_passion_of_saint_john_the_baptist_martyr/1
+    ,the_presentation_of_the_blessed_virgin_mary/1
+    ,the_presentation_of_the_lord/1
+    ,the_queenship_of_the_blessed_virgin_mary/1
+    ,the_seven_founders_of_the_order_of_servites_religious/1
+    ,the_transfiguration_of_the_lord/1
+    ,the_visitation_of_the_blessed_virgin_mary/1
+    ,third_sunday_advent/1
+]).
+
+% This module contains all liturgical date identifier constants.
+% Each constant is defined as a fact that returns its atom value.
+% Usage: constants:saint_patrick_bishop(ID) binds ID to 'saint_patrick_bishop'
+
+all_saints('all_saints').
+ascension_of_the_lord('ascension_of_the_lord').
+ash_wednesday('ash_wednesday').
+blessed_bronislaw_markiewicz_priest('blessed_bronislaw_markiewicz_priest').
+blessed_marcelina_darowska_religious('blessed_marcelina_darowska_religious').
+blessed_wladyslaw_bladzinski_priest_and_companions_martyrs('blessed_wladyslaw_bladzinski_priest_and_companions_martyrs').
+easter_sunday_of_the_lords_resurrection('easter_sunday_of_the_lords_resurrection').
+first_sunday_advent('first_sunday_advent').
+fourth_sunday_advent('fourth_sunday_advent').
+good_friday_of_the_lords_passion('good_friday_of_the_lords_passion').
+holy_saturday('holy_saturday').
+holy_thursday_of_the_lords_supper('holy_thursday_of_the_lords_supper').
+our_lady_of_czestochowa('our_lady_of_czestochowa').
+our_lady_of_fatima('our_lady_of_fatima').
+our_lady_of_guadalupe('our_lady_of_guadalupe').
+our_lady_of_loreto('our_lady_of_loreto').
+our_lady_of_lourdes('our_lady_of_lourdes').
+our_lady_of_mercy('our_lady_of_mercy').
+our_lady_of_mount_carmel('our_lady_of_mount_carmel').
+our_lady_of_sorrows('our_lady_of_sorrows').
+our_lady_of_the_rosary('our_lady_of_the_rosary').
+our_lord_jesus_christ_king_of_the_universe('our_lord_jesus_christ_king_of_the_universe').
+our_lord_jesus_christ_the_eternal_high_priest('our_lord_jesus_christ_the_eternal_high_priest').
+palm_sunday_of_the_lords_passion('palm_sunday_of_the_lords_passion').
+pentecost_sunday('pentecost_sunday').
+saint_adalbert_bishop_and_martyr('saint_adalbert_bishop_and_martyr').
+saint_agatha_virgin_and_martyr('saint_agatha_virgin_and_martyr').
+saint_agnes_virgin_and_martyr('saint_agnes_virgin_and_martyr').
+saint_albert_chmielowski_religious('saint_albert_chmielowski_religious').
+saint_albert_the_great_bishop_and_doctor_of_the_church('saint_albert_the_great_bishop_and_doctor_of_the_church').
+saint_aloysius_gonzaga_religious('saint_aloysius_gonzaga_religious').
+saint_alphonsus_liguori_bishop_and_doctor_of_the_church('saint_alphonsus_liguori_bishop_and_doctor_of_the_church').
+saint_ambrose_bishop_and_doctor_of_the_church('saint_ambrose_bishop_and_doctor_of_the_church').
+saint_andrew_apostle('saint_andrew_apostle').
+saint_andrew_dunglac_priest_and_companions_martyrs('saint_andrew_dunglac_priest_and_companions_martyrs').
+saint_andrew_kim_taegon_priest_saint_paul_chong_hasang_and_companions_martyrs('saint_andrew_kim_taegon_priest_saint_paul_chong_hasang_and_companions_martyrs').
+saint_andrzej_bobola_priest_and_martyr('saint_andrzej_bobola_priest_and_martyr').
+saint_angela_merici_virgin('saint_angela_merici_virgin').
+saint_anselm_bishop_and_doctor_of_the_church('saint_anselm_bishop_and_doctor_of_the_church').
+saint_ansgar_bishop('saint_ansgar_bishop').
+saint_anthony_abbot('saint_anthony_abbot').
+saint_anthony_mary_claret_bishop('saint_anthony_mary_claret_bishop').
+saint_anthony_mary_zaccaria_priest('saint_anthony_mary_zaccaria_priest').
+saint_anthony_of_padua_priest_and_doctor_of_the_church('saint_anthony_of_padua_priest_and_doctor_of_the_church').
+saint_apollinaris_bishop_and_martyr('saint_apollinaris_bishop_and_martyr').
+saint_athanasius_bishop_and_doctor_of_the_church('saint_athanasius_bishop_and_doctor_of_the_church').
+saint_augustine_bishop_and_doctor_of_the_church('saint_augustine_bishop_and_doctor_of_the_church').
+saint_augustine_of_canterbury_bishop('saint_augustine_of_canterbury_bishop').
+saint_augustine_zhao_rong_priest_and_companions_martyrs('saint_augustine_zhao_rong_priest_and_companions_martyrs').
+saint_barnabas_apostle('saint_barnabas_apostle').
+saint_bartholomew_apostle('saint_bartholomew_apostle').
+saint_basil_the_great_and_saint_gregory_nazianzen_bishops_and_doctors_of_the_church('saint_basil_the_great_and_saint_gregory_nazianzen_bishops_and_doctors_of_the_church').
+saint_bede_the_venerable_priest_and_doctor_of_the_church('saint_bede_the_venerable_priest_and_doctor_of_the_church').
+saint_benedict_abbot('saint_benedict_abbot').
+saint_bernard_abbot_and_doctor_of_the_church('saint_bernard_abbot_and_doctor_of_the_church').
+saint_bernardine_of_siena_priest('saint_bernardine_of_siena_priest').
+saint_blase_bishop_and_martyr('saint_blase_bishop_and_martyr').
+saint_bonaventure_bishop_and_doctor_of_the_church('saint_bonaventure_bishop_and_doctor_of_the_church').
+saint_boniface_bishop_and_martyr('saint_boniface_bishop_and_martyr').
+saint_bridget_religious('saint_bridget_religious').
+saint_bruno_priest('saint_bruno_priest').
+saint_cajetan_priest('saint_cajetan_priest').
+saint_callistus_i_pope_and_martyr('saint_callistus_i_pope_and_martyr').
+saint_camillus_de_lellis_priest('saint_camillus_de_lellis_priest').
+saint_casimir('saint_casimir').
+saint_catherine_of_alexandria_virgin_and_martyr('saint_catherine_of_alexandria_virgin_and_martyr').
+saint_catherine_of_siena_virgin_and_doctor_of_the_church('saint_catherine_of_siena_virgin_and_doctor_of_the_church').
+saint_cecilia_virgin_and_martyr('saint_cecilia_virgin_and_martyr').
+saint_charles_borromeo_bishop('saint_charles_borromeo_bishop').
+saint_charles_lwanga_and_companions_martyrs('saint_charles_lwanga_and_companions_martyrs').
+saint_christopher_magallanes_priest_and_companions_martyrs('saint_christopher_magallanes_priest_and_companions_martyrs').
+saint_clare_virgin('saint_clare_virgin').
+saint_clement_i_pope_and_martyr('saint_clement_i_pope_and_martyr').
+saint_columban_abbot('saint_columban_abbot').
+saint_cornelius_pope_and_saint_cyprian_bishop_martyrs('saint_cornelius_pope_and_saint_cyprian_bishop_martyrs').
+saint_cosmas_and_saint_damian_martyrs('saint_cosmas_and_saint_damian_martyrs').
+saint_cyril_monk_and_saint_methodius_bishop('saint_cyril_monk_and_saint_methodius_bishop').
+saint_cyril_of_alexandria_bishop_and_doctor_of_the_church('saint_cyril_of_alexandria_bishop_and_doctor_of_the_church').
+saint_cyril_of_jerusalem_bishop_and_doctor_of_the_church('saint_cyril_of_jerusalem_bishop_and_doctor_of_the_church').
+saint_damasus_i_pope('saint_damasus_i_pope').
+saint_denis_bishop_and_companions_martyrs('saint_denis_bishop_and_companions_martyrs').
+saint_dominic_priest('saint_dominic_priest').
+saint_elizabeth_of_hungary_religious('saint_elizabeth_of_hungary_religious').
+saint_elizabeth_of_portugal('saint_elizabeth_of_portugal').
+saint_ephrem_deacon_and_doctor_of_the_church('saint_ephrem_deacon_and_doctor_of_the_church').
+saint_eusebius_of_vercelli_bishop('saint_eusebius_of_vercelli_bishop').
+saint_fabian_pope_and_martyr('saint_fabian_pope_and_martyr').
+saint_faustina_kowalska_virgin('saint_faustina_kowalska_virgin').
+saint_fidelis_of_sigmaringen_priest_and_martyr('saint_fidelis_of_sigmaringen_priest_and_martyr').
+saint_frances_of_rome_religious('saint_frances_of_rome_religious').
+saint_francis_de_sales_bishop_and_doctor_of_the_church('saint_francis_de_sales_bishop_and_doctor_of_the_church').
+saint_francis_of_assisi_religious('saint_francis_of_assisi_religious').
+saint_francis_of_paola_hermit('saint_francis_of_paola_hermit').
+saint_francis_xavier_priest('saint_francis_xavier_priest').
+saint_george_martyr('saint_george_martyr').
+saint_gertrude_virgin('saint_gertrude_virgin').
+saint_gregory_of_narek_abbot_and_doctor_of_the_church('saint_gregory_of_narek_abbot_and_doctor_of_the_church').
+saint_gregory_the_great_pope_and_doctor_of_the_church('saint_gregory_the_great_pope_and_doctor_of_the_church').
+saint_gregory_vii_pope('saint_gregory_vii_pope').
+saint_hedwig_religious('saint_hedwig_religious').
+saint_henry('saint_henry').
+saint_hilary_bishop_and_doctor_of_the_church('saint_hilary_bishop_and_doctor_of_the_church').
+saint_hildegard_of_bingen_virgin_and_doctor_of_the_church('saint_hildegard_of_bingen_virgin_and_doctor_of_the_church').
+saint_hyacinth_of_poland_priest('saint_hyacinth_of_poland_priest').
+saint_ignatius_of_antioch_bishop_and_martyr('saint_ignatius_of_antioch_bishop_and_martyr').
+saint_ignatius_of_loyola_priest('saint_ignatius_of_loyola_priest').
+saint_irenaeus_bishop_martyr_and_doctor_of_the_church('saint_irenaeus_bishop_martyr_and_doctor_of_the_church').
+saint_isidore_bishop_and_doctor_of_the_church('saint_isidore_bishop_and_doctor_of_the_church').
+saint_jadwiga_of_poland('saint_jadwiga_of_poland').
+saint_james_apostle('saint_james_apostle').
+saint_jane_frances_de_chantal_religious('saint_jane_frances_de_chantal_religious').
+saint_januarius_bishop_and_martyr('saint_januarius_bishop_and_martyr').
+saint_jerome_emiliani('saint_jerome_emiliani').
+saint_jerome_priest_and_doctor_of_the_church('saint_jerome_priest_and_doctor_of_the_church').
+saint_joachim_and_saint_anne_parents_of_the_blessed_virgin_mary('saint_joachim_and_saint_anne_parents_of_the_blessed_virgin_mary').
+saint_john_apostle_and_evangelist('saint_john_apostle_and_evangelist').
+saint_john_baptist_de_la_salle_priest('saint_john_baptist_de_la_salle_priest').
+saint_john_bosco_priest('saint_john_bosco_priest').
+saint_john_chrysostom_bishop_and_doctor_of_the_church('saint_john_chrysostom_bishop_and_doctor_of_the_church').
+saint_john_damascene_priest_and_doctor_of_the_church('saint_john_damascene_priest_and_doctor_of_the_church').
+saint_john_de_brebeuf_saint_isaac_jogues_priests_and_companions_martyrs('saint_john_de_brebeuf_saint_isaac_jogues_priests_and_companions_martyrs').
+saint_john_eudes_priest('saint_john_eudes_priest').
+saint_john_fisher_bishop_and_saint_thomas_more_martyrs('saint_john_fisher_bishop_and_saint_thomas_more_martyrs').
+saint_john_i_pope_and_martyr('saint_john_i_pope_and_martyr').
+saint_john_leonardi_priest('saint_john_leonardi_priest').
+saint_john_of_avila_priest_and_doctor_of_the_church('saint_john_of_avila_priest_and_doctor_of_the_church').
+saint_john_of_capistrano_priest('saint_john_of_capistrano_priest').
+saint_john_of_dukla_priest('saint_john_of_dukla_priest').
+saint_john_of_god_religious('saint_john_of_god_religious').
+saint_john_of_kanty_priest('saint_john_of_kanty_priest').
+saint_john_of_nepomuk_priest_and_martyr('saint_john_of_nepomuk_priest_and_martyr').
+saint_john_of_the_cross_priest_and_doctor_of_the_church('saint_john_of_the_cross_priest_and_doctor_of_the_church').
+saint_john_paul_ii_pope('saint_john_paul_ii_pope').
+saint_john_vianney_priest('saint_john_vianney_priest').
+saint_john_xxiii_pope('saint_john_xxiii_pope').
+saint_josaphat_bishop_and_martyr('saint_josaphat_bishop_and_martyr').
+saint_joseph_calasanz_priest('saint_joseph_calasanz_priest').
+saint_joseph_husband_of_mary('saint_joseph_husband_of_mary').
+saint_joseph_the_worker('saint_joseph_the_worker').
+saint_josephine_bakhita_virgin('saint_josephine_bakhita_virgin').
+saint_jozef_bilczewski_bishop('saint_jozef_bilczewski_bishop').
+saint_juan_diego_cuauhtlatoatzin('saint_juan_diego_cuauhtlatoatzin').
+saint_justin_martyr('saint_justin_martyr').
+saint_lawrence_deacon_and_martyr('saint_lawrence_deacon_and_martyr').
+saint_lawrence_of_brindisi_priest_and_doctor_of_the_church('saint_lawrence_of_brindisi_priest_and_doctor_of_the_church').
+saint_lawrence_ruiz_and_companions_martyrs('saint_lawrence_ruiz_and_companions_martyrs').
+saint_leo_the_great_pope_and_doctor_of_the_church('saint_leo_the_great_pope_and_doctor_of_the_church').
+saint_louis('saint_louis').
+saint_louis_grignion_de_montfort_priest('saint_louis_grignion_de_montfort_priest').
+saint_lucy_virgin_and_martyr('saint_lucy_virgin_and_martyr').
+saint_luke_evangelist('saint_luke_evangelist').
+saint_marcellinus_and_saint_peter_martyrs('saint_marcellinus_and_saint_peter_martyrs').
+saint_margaret_mary_alacoque_virgin('saint_margaret_mary_alacoque_virgin').
+saint_margaret_of_scotland('saint_margaret_of_scotland').
+saint_maria_goretti_virgin_and_martyr('saint_maria_goretti_virgin_and_martyr').
+saint_mark_evangelist('saint_mark_evangelist').
+saint_martha_saint_mary_and_saint_lazarus('saint_martha_saint_mary_and_saint_lazarus').
+saint_martin_de_porres_religious('saint_martin_de_porres_religious').
+saint_martin_i_pope_and_martyr('saint_martin_i_pope_and_martyr').
+saint_martin_of_tours_bishop('saint_martin_of_tours_bishop').
+saint_mary_magdalene('saint_mary_magdalene').
+saint_mary_magdalene_de_pazzi_virgin('saint_mary_magdalene_de_pazzi_virgin').
+saint_matthew_apostle_and_evangelist('saint_matthew_apostle_and_evangelist').
+saint_matthias_apostle('saint_matthias_apostle').
+saint_maximilian_kolbe_priest_and_martyr('saint_maximilian_kolbe_priest_and_martyr').
+saint_michael_saint_gabriel_and_saint_raphael_archangels('saint_michael_saint_gabriel_and_saint_raphael_archangels').
+saint_monica('saint_monica').
+saint_nereus_and_saint_achilleus_martyrs('saint_nereus_and_saint_achilleus_martyrs').
+saint_nicholas_bishop('saint_nicholas_bishop').
+saint_norbert_bishop('saint_norbert_bishop').
+saint_olga_of_kiev('saint_olga_of_kiev').
+saint_pancras_martyr('saint_pancras_martyr').
+saint_patrick_bishop('saint_patrick_bishop').
+saint_paul_miki_and_companions_martyrs('saint_paul_miki_and_companions_martyrs').
+saint_paul_of_the_cross_priest('saint_paul_of_the_cross_priest').
+saint_paul_vi_pope('saint_paul_vi_pope').
+saint_paulinus_of_nola_bishop('saint_paulinus_of_nola_bishop').
+saint_perpetua_and_saint_felicity_martyrs('saint_perpetua_and_saint_felicity_martyrs').
+saint_peter_and_saint_paul_apostles('saint_peter_and_saint_paul_apostles').
+saint_peter_canisius_priest_and_doctor_of_the_church('saint_peter_canisius_priest_and_doctor_of_the_church').
+saint_peter_chanel_priest_and_martyr('saint_peter_chanel_priest_and_martyr').
+saint_peter_chrysologus_bishop_and_doctor_of_the_church('saint_peter_chrysologus_bishop_and_doctor_of_the_church').
+saint_peter_claver_priest('saint_peter_claver_priest').
+saint_peter_damian_bishop_and_doctor_of_the_church('saint_peter_damian_bishop_and_doctor_of_the_church').
+saint_peter_julian_eymard_priest('saint_peter_julian_eymard_priest').
+saint_philip_and_saint_james_apostles('saint_philip_and_saint_james_apostles').
+saint_philip_neri_priest('saint_philip_neri_priest').
+saint_pius_of_pietrelcina_priest('saint_pius_of_pietrelcina_priest').
+saint_pius_v_pope('saint_pius_v_pope').
+saint_pius_x_pope('saint_pius_x_pope').
+saint_polycarp_bishop_and_martyr('saint_polycarp_bishop_and_martyr').
+saint_pontian_pope_and_saint_hippolytus_priest_martyrs('saint_pontian_pope_and_saint_hippolytus_priest_martyrs').
+saint_raymond_of_penyafort_priest('saint_raymond_of_penyafort_priest').
+saint_rita_of_cassia_religious('saint_rita_of_cassia_religious').
+saint_robert_bellarmine_bishop_and_doctor_of_the_church('saint_robert_bellarmine_bishop_and_doctor_of_the_church').
+saint_romuald_abbot('saint_romuald_abbot').
+saint_rose_of_lima_virgin('saint_rose_of_lima_virgin').
+saint_scholastica_virgin('saint_scholastica_virgin').
+saint_sebastian_martyr('saint_sebastian_martyr').
+saint_sharbel_makhluf_priest('saint_sharbel_makhluf_priest').
+saint_simon_and_saint_jude_apostles('saint_simon_and_saint_jude_apostles').
+saint_sixtus_ii_pope_and_companions_martyrs('saint_sixtus_ii_pope_and_companions_martyrs').
+saint_stanislaus_bishop_and_martyr('saint_stanislaus_bishop_and_martyr').
+saint_stanislaus_kostka_religious('saint_stanislaus_kostka_religious').
+saint_stephen_first_martyr('saint_stephen_first_martyr').
+saint_stephen_of_hungary('saint_stephen_of_hungary').
+saint_sylvester_i_pope('saint_sylvester_i_pope').
+saint_teresa_benedicta_of_the_cross_virgin_and_martyr('saint_teresa_benedicta_of_the_cross_virgin_and_martyr').
+saint_teresa_of_calcutta_virgin('saint_teresa_of_calcutta_virgin').
+saint_teresa_of_jesus_virgin_and_doctor_of_the_church('saint_teresa_of_jesus_virgin_and_doctor_of_the_church').
+saint_therese_of_the_child_jesus_virgin_and_doctor_of_the_church('saint_therese_of_the_child_jesus_virgin_and_doctor_of_the_church').
+saint_thomas_apostle('saint_thomas_apostle').
+saint_thomas_aquinas_priest_and_doctor_of_the_church('saint_thomas_aquinas_priest_and_doctor_of_the_church').
+saint_thomas_becket_bishop_and_martyr('saint_thomas_becket_bishop_and_martyr').
+saint_timothy_and_saint_titus_bishops('saint_timothy_and_saint_titus_bishops').
+saint_turibius_de_mongrovejo_bishop('saint_turibius_de_mongrovejo_bishop').
+saint_vincent_de_paul_priest('saint_vincent_de_paul_priest').
+saint_vincent_deacon_and_martyr('saint_vincent_deacon_and_martyr').
+saint_vincent_ferrer_priest('saint_vincent_ferrer_priest').
+saint_vladimir('saint_vladimir').
+saint_wenceslaus_martyr('saint_wenceslaus_martyr').
+saint_zygmunt_gorazdowski_priest('saint_zygmunt_gorazdowski_priest').
+second_sunday_advent('second_sunday_advent').
+second_sunday_of_easter('second_sunday_of_easter').
+the_annunciation_of_the_lord('the_annunciation_of_the_lord').
+the_assumption_of_the_blessed_virgin_mary('the_assumption_of_the_blessed_virgin_mary').
+the_baptism_of_the_lord('the_baptism_of_the_lord').
+the_blessed_virgin_mary_mother_of_the_church('the_blessed_virgin_mary_mother_of_the_church').
+the_blessed_virgin_mary_on_saturday('the_blessed_virgin_mary_on_saturday').
+the_blessed_virgin_mary_the_mother_of_god('the_blessed_virgin_mary_the_mother_of_god').
+the_chair_of_saint_peter_apostle('the_chair_of_saint_peter_apostle').
+the_commemoration_of_all_the_faithful_departed_all_souls('the_commemoration_of_all_the_faithful_departed_all_souls').
+the_conversion_of_saint_paul_apostle('the_conversion_of_saint_paul_apostle').
+the_dedication_of_the_basilica_of_saint_mary_major_in_rome('the_dedication_of_the_basilica_of_saint_mary_major_in_rome').
+the_dedication_of_the_basilicas_of_saint_peter_and_saint_paul_in_rome_apostles('the_dedication_of_the_basilicas_of_saint_peter_and_saint_paul_in_rome_apostles').
+the_dedication_of_the_lateran_basilica_in_rome('the_dedication_of_the_lateran_basilica_in_rome').
+the_epiphany_of_the_lord('the_epiphany_of_the_lord').
+the_exaltation_of_the_holy_cross('the_exaltation_of_the_holy_cross').
+the_first_martyrs_of_the_church_of_rome('the_first_martyrs_of_the_church_of_rome').
+the_holy_family_of_jesus_mary_and_joseph('the_holy_family_of_jesus_mary_and_joseph').
+the_holy_guardian_angels('the_holy_guardian_angels').
+the_holy_innocents_martyrs('the_holy_innocents_martyrs').
+the_immaculate_conception_of_the_blessed_virgin_mary('the_immaculate_conception_of_the_blessed_virgin_mary').
+the_immaculate_heart_of_the_blessed_virgin_mary('the_immaculate_heart_of_the_blessed_virgin_mary').
+the_most_holy_body_and_blood_of_christ('the_most_holy_body_and_blood_of_christ').
+the_most_holy_name_of_jesus('the_most_holy_name_of_jesus').
+the_most_holy_name_of_mary('the_most_holy_name_of_mary').
+the_most_holy_trinity('the_most_holy_trinity').
+the_most_sacred_heart_of_jesus('the_most_sacred_heart_of_jesus').
+the_nativity_of_saint_john_the_baptist('the_nativity_of_saint_john_the_baptist').
+the_nativity_of_the_blessed_virgin_mary('the_nativity_of_the_blessed_virgin_mary').
+the_nativity_of_the_lord_christmas('the_nativity_of_the_lord_christmas').
+the_passion_of_saint_john_the_baptist_martyr('the_passion_of_saint_john_the_baptist_martyr').
+the_presentation_of_the_blessed_virgin_mary('the_presentation_of_the_blessed_virgin_mary').
+the_presentation_of_the_lord('the_presentation_of_the_lord').
+the_queenship_of_the_blessed_virgin_mary('the_queenship_of_the_blessed_virgin_mary').
+the_seven_founders_of_the_order_of_servites_religious('the_seven_founders_of_the_order_of_servites_religious').
+the_transfiguration_of_the_lord('the_transfiguration_of_the_lord').
+the_visitation_of_the_blessed_virgin_mary('the_visitation_of_the_blessed_virgin_mary').
+third_sunday_advent('third_sunday_advent').
