@@ -1,6 +1,7 @@
-:- module(catchall, [christmas_anchor_year/3]).
+:- module(catchall, [date_seasonal/9]).
 
 :- use_module(advent).
+:- use_module(christmas).
 :- use_module(easter).
 :- use_module(epiphany).
 :- use_module(lent).
@@ -16,14 +17,10 @@
 :- use_module(util).
 :- use_module(constants).
 :- multifile liturgical:date_internal/8.
-
-% Mary to Epiphany -> Christmas Octave
-% Christmas to End of Year -> Christmas
-christmas_anchor_year(Year, Month, AnchorYear) :-
-    ( Month =:= 12 -> AnchorYear = Year ; AnchorYear is Year - 1 ).
+:- discontiguous date_seasonal/9.
 
 % Mary to Epiphany -> Christmas
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
 
     epiphany_date(Year, EpM, EpD),
@@ -35,7 +32,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     christmas_name(Weekday, Name).
 
 % Epiphany to Baptism -> Epiphany
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
 
     baptism_date(Year, BaptM, BaptD),
@@ -50,6 +47,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
 % Blessed Virgin Mary on Saturday (Optional Memorial in Ordinary Time)
 liturgical:date_internal(ID, Year, Month, Day, false, false, true, false) :-
     constants:the_blessed_virgin_mary_on_saturday(ID),
+    integer(Year), integer(Month), integer(Day),
     % Must be a Saturday
     day_of_the_week(date(Year, Month, Day), 6),
 
@@ -68,7 +66,7 @@ liturgical:date_internal(ID, Year, Month, Day, false, false, true, false) :-
     ( (TCur > TBapt, TCur < TAsh) ; (TCur > TPent, TCur < TAdv) ).
 
 % Baptism to Ash Wednesday -> Ordinary Time
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     baptism_date(Year, BaptM, BaptD),
     date_stamp(Year, BaptM, BaptD, TBapt),
@@ -97,7 +95,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     !.
 
 % Ash Wednesday to Palm Sunday -> Lent
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     ash_wednesday_date(Year, AshM, AshD),
     date_stamp(Year, AshM, AshD, TAsh),
@@ -125,7 +123,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     !.
 
 % Palm Sunday to Holy Thursday -> Holy Week
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     palm_sunday_date(Year, PalmM, PalmD),
     date_stamp(Year, PalmM, PalmD, TPalm),
@@ -141,7 +139,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     !.
 
 % Easter to Divine Mercy Sunday -> Octave of Easter
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     easter_date(Year, EasterM, EasterD),
     date_stamp(Year, EasterM, EasterD, TEaster),
@@ -156,7 +154,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     !.
 
 % Divine Mercy Sunday to Pentecost -> Easter
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     divine_mercy_sunday_date(Year, DivineM, DivineD),
     date_stamp(Year, DivineM, DivineD, TDivine),
@@ -179,7 +177,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     !.
 
 % Pentecost to First Sunday of Advent -> Ordinary Time
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     pentecost_date(Year, PentM, PentD),
     date_stamp(Year, PentM, PentD, TPent),
@@ -210,7 +208,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     !.
 
 % First Sunday of Advent to Christmas -> Advent
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
     first_sunday_advent(Year, AdvM, AdvD),
     date_stamp(Year, AdvM, AdvD, TAdv),
@@ -233,7 +231,7 @@ liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
     !.
 
 % Christmas Day to Epiphany -> Christmas Octave
-liturgical:date(_, Name, Year, Month, Day, false, false, false, false) :-
+date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     date_stamp(Year, Month, Day, TCur),
 
     christmas_anchor_year(Year, Month, CYear),

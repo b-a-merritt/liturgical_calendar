@@ -14,16 +14,14 @@ ash_wednesday_date(Year, Month, Day) :-
 
 liturgical:date_internal(ID, Year, Month, Day, false, false, false, false) :-
     constants:ash_wednesday(ID),
-    ash_wednesday_date(Year, Month, Day),
-    !.
+    ash_wednesday_date(Year, Month, Day).
 
 liturgical:date_internal(ID, Year, Month, Day, true, false, false, false) :-
     constants:saint_joseph_husband_of_mary(ID),
     ( transferable(ID, true)
     -> next_sunday(Year, 3, 19, Year, Month, Day)
     ;  Month = 3, Day = 19
-    ),
-    !.
+    ).
 
 liturgical:date_internal(ID, Year, Month, Day, true, false, false, false) :-
     constants:the_annunciation_of_the_lord(ID),
@@ -38,5 +36,4 @@ liturgical:date_internal(ID, Year, Month, Day, true, false, false, false) :-
        days_after(Year, DivineM, DivineD, 1, _, Month, Day)
     ;  % Normal date
        Month = 3, Day = 25
-    ),
-    !.
+    ).

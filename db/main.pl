@@ -28,3 +28,8 @@
 date(DateId, Name, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration) :-
     date_internal(DateId, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration),
     en:name(DateId, Name).
+% Fallback: seasonal catch-all for dates not in the fixed calendar
+% Requires a fully ground date since catchall does date arithmetic
+date(DateId, Name, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration) :-
+    integer(Year), integer(Month), integer(Day),
+    catchall:date_seasonal(DateId, Name, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration).

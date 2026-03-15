@@ -18,10 +18,8 @@ baptism_date(Year, Month, Day) :-
 
 liturgical:date_internal(ID, Year, Month, Day, true, false, false, false) :-
     constants:the_epiphany_of_the_lord(ID),
-    epiphany_date(Year, Month, Day),
-    !.
+    epiphany_date(Year, Month, Day).
 
 liturgical:date_internal(ID, Year, Month, Day, false, false, false, false) :-
     constants:the_baptism_of_the_lord(ID),
-    baptism_date(Year, Month, Day),
-    !.
+    baptism_date(Year, Month, Day).
