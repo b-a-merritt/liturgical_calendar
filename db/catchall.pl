@@ -29,7 +29,8 @@ date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
 
     day_of_the_week(date(Year, Month, Day), WN),
     weekday_atom(WN, Weekday),
-    christmas_name(Weekday, Name).
+    christmas_name(Weekday, Name),
+    !.
 
 % Epiphany to Baptism -> Epiphany
 date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
@@ -41,7 +42,8 @@ date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
 
     day_of_the_week(date(Year, Month, Day), WN),
     weekday_atom(WN, Weekday),
-    epiphany_name(Weekday, Name).
+    epiphany_name(Weekday, Name),
+    !.
 
 
 % Blessed Virgin Mary on Saturday (Optional Memorial in Ordinary Time)
@@ -119,8 +121,7 @@ date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
 
     day_of_the_week(date(Year, Month, Day), WN),
     weekday_atom(WN, Weekday),
-    season_name(Weekday, Week, 'Lent', Name),
-    !.
+    season_name(Weekday, Week, 'Lent', Name).
 
 % Palm Sunday to Holy Thursday -> Holy Week
 date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
@@ -173,8 +174,7 @@ date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
 
     day_of_the_week(date(Year, Month, Day), WN),
     weekday_atom(WN, Weekday),
-    season_name(Weekday, Week, 'Easter', Name),
-    !.
+    season_name(Weekday, Week, 'Easter', Name).
 
 % Pentecost to First Sunday of Advent -> Ordinary Time
 date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
@@ -241,4 +241,5 @@ date_seasonal(_, Name, Year, Month, Day, false, false, false, false) :-
     Secs is TCur - TXmas,
     DaysSince is floor(Secs / (24 * 60 * 60)),
 
-    christmas_octave_name(DaysSince, Name).
+    christmas_octave_name(DaysSince, Name),
+    !.

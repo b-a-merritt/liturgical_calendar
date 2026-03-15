@@ -25,11 +25,21 @@
 
 % Public API: date/9 with name resolved from translations
 % date(DateId, Name, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration)
-date(DateId, Name, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration) :-
-    date_internal(DateId, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration),
+
+date(DateId, Name, Year, Month, Day, _, IsFeast, IsOptionalMemorial, IsOptionalCommemoration) :-
+    date_internal(DateId, Year, Month, Day, true, IsFeast, IsOptionalMemorial, IsOptionalCommemoration),
+    en:name(DateId, Name),
+    !.
+
+date(DateId, Name, Year, Month, Day, _, _, IsOptionalMemorial, IsOptionalCommemoration) :-
+    date_internal(DateId, Year, Month, Day, false, true, IsOptionalMemorial, IsOptionalCommemoration),
+    en:name(DateId, Name),
+    !.
+
+date(DateId, Name, Year, Month, Day, _, IsFeast, IsOptionalMemorial, IsOptionalCommemoration) :-
+    date_internal(DateId, Year, Month, Day, false, IsFeast, IsOptionalMemorial, IsOptionalCommemoration),
     en:name(DateId, Name).
-% Fallback: seasonal catch-all for dates not in the fixed calendar
-% Requires a fully ground date since catchall does date arithmetic
+
 date(DateId, Name, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration) :-
     integer(Year), integer(Month), integer(Day),
     catchall:date_seasonal(DateId, Name, Year, Month, Day, IsSolemnity, IsFeast, IsOptionalMemorial, IsOptionalCommemoration).
