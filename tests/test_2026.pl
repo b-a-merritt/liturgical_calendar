@@ -1,5 +1,5 @@
-:- use_module('../db/main').
-:- use_module('../db/constants').
+:- use_module('../src/db/main').
+:- use_module('../src/db/constants').
 :- use_module(library(plunit)).
 
 %% Tests for 2026 Liturgical Calendar
